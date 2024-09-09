@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "EmergencyApproval";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/assets/img/favicon.html">
+    <title></title>
+    <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
+</head>
+<body>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Approve Issue Request
+
+            </h1>
+
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- /.box -->
+
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title"> Approve Issue Request</h3>
+                        </div>
+                        <div class="">
+
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="ApproveData" class="table table-bordered table-striped">
+                                <thead>
+
+                                    <tr>
+                                        <th>Sno</th>
+                                        <th>UMC_No</th>
+                                        <th>Item-Desc</th>
+                                      
+                                        @*<th>Category</th>*@
+                                        <th>Qty</th>
+                                        <th>Emergency-Qty</th>
+                                        <th>Issue By</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Sno</th>
+                                        <th>UMC_No</th>
+                                        <th>Item-Desc</th>
+                                      
+                                        @*<th>Category</th>*@
+                                        <th>Qty</th>
+                                        <th>Emergency-Qty</th>
+                                        <th>Issue By</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+
+
+
+
+
+
+
+    <!-- jQuery 3 -->
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- DataTables -->
+    <script src="/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+    <script src="~/Scripts/EmergencyIssueApproval.js"></script>
+    <script>
+
+    </script>
+
+</body>
+
+</html>
+

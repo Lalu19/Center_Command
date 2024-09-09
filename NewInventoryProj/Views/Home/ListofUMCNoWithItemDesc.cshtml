@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "ListofUMCNoWithItemDesc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/assets/img/favicon.html">
+    <title>Sub-Location</title>
+    <link href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">*@
+    <style>
+        div.dataTables_wrapper div.dataTables_filter input {
+            margin-left: 0.5em;
+            display: inline-block;
+            width: 400px;
+        }
+
+        #CentralStore_Item {
+            transform: scale(1.3);
+        }
+    </style>
+
+</head>
+<body>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                List of UMCNo With ItemDesc
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="@Url.Action("AddUMCNOwithItemDesc","Home")" class="btn btn-round btn-primary right-side"><i class="fa fa-plus"> Add</i></a>
+                </li>
+
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- /.box -->
+
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">   List of UMCNo With ItemDesc</h3>
+                        </div>
+                        <div class="">
+
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="Empcodee" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>UMC No</th>
+                                        <th>Item Desc</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="loader"></tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+
+    <script src="/assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
+
+    <!-- DataTables -->
+    <script src="~/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $.ajax({
+                url: '/api/Inventory/AllUMCNoData',
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+
+                    $('#Empcodee').find('tbody').empty();
+                    $.each(JSON.parse(data), function (i, val) {
+
+                        var slno = i + 1;
+                        var text = "<tr style='background-color: #ffffff !important;'>";
+                        text = text
+                            + "<td class = ''>"
+                            + slno
+                            + "</td><td style= 'text-align: left;'>  <a href='#' class = 'UMCNo'>"
+                            + val.UMCNo
+                            + "</a></td><td style= 'text-align: left;'>  <a href='#' class = 'Itemdesc'>"
+                            + val.Itemdesc
+                            + "</a></td> </tr>";
+
+                        $('#Empcodee').find('tbody').append(text);
+
+                    });
+                    $('#Empcodee').dataTable(
+                        {
+                            "lengthMenu": [[10, 15, 20, -1],
+                            [10, 15, 20, "All"]],
+                            autoWidth: false,
+                            responsive: true,
+
+
+                            "drawCallback": function (settings) {
+
+                                $('[data-toggle="tooltip"]').tooltip({
+                                    container: 'body'
+                                })
+                            },
+                        });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "Employee Insert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link type="text/css" href="assets/css/themes/blue-sky.css" rel="stylesheet">
+</head>
+<body>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>Apply For Registration</h1>
+            <ol class="breadcrumb">
+                <li><a href="@Url.Action("Login","Home")"><i class="fa fa-dashboard"></i> Home</a></li>
+
+                <li class="active">Register</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <!-- Horizontal Form -->
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Apply For Registration </h3>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                            <table class="table table-responsive">
+                                <tr>
+                                    <td>
+                                        <label for="emailExample1">Employee Id</label>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" id="Personal_No" name="Personal_No" type="text" placeholder="Enter Emp Code">
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <label>Name</label>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="text" id="Name" name="Name" placeholder="Enter Name">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="emailExample1">Email</label>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" id="Email" name="Email" type="email" placeholder="Enter email">
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <label>Mobile</label>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" min="0" id="Mobile" name="Mobile" placeholder="Enter Mobile">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    @*<td>
+            <label for="emailExample1">Category</label>
+
+        </td>
+        <td>
+            <select name="Category" id="Category" class="form-control">
+                <option name="0" value="0">Select Category</option>
+                <option value="MAT-Receive">MAT_Receive</option>
+                <option value="MAT-Issue">MAT-Issue</option>
+            </select>
+        </td>*@
+
+                                    <td>
+                                        <label>Password</label>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="password" name="Password" id="Password" placeholder="Enter password" required>
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <button class="btn btn-space btn-primary" type="button" onclick="InsertEmployee()">Submit</button>
+                                        <a href="@Url.Action("Login","Home")" class="btn btn-primary">Cancel</a>
+
+                                    </td>
+                                </tr>
+                               
+                            </table>    
+                       
+                    </div>
+                    <!-- /.box -->
+
+                </div>
+                <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="~/Scripts/EmployeeRegistrationApply.js"></script>
+</body>
+</html>

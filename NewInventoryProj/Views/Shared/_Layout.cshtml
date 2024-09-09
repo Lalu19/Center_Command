@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from adminlte.io/themes/AdminLTE/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 10 Dec 2020 05:46:19 GMT -->
+<!-- Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CENTER | COMMAND</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="/bower_components/bootstrap//dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="/bower_components/jvectormap/jquery-jvectormap.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+   
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+
+    @{
+        string User = null;
+        if (Session["User"] != null)
+        {
+            User = Session["User"].ToString();
+        }
+        string Category = null;
+        if (Session["Category"] != null)
+        {
+            Category = Session["Category"].ToString();
+        }
+
+    }
+
+    <div class="wrapper">
+
+        <header class="main-header">
+
+            <!-- Logo -->
+            <a href="" class="logo">
+                <!-- mini logo for sidebar  mini 50x50 pixels -->
+                <span class="logo-mini"><b>TS</b>BSL</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>TATA STEEL</b></span>
+            </a>
+
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="nav navbar-nav" style="margin-left: 28%;font-size: 130%;margin-top: 12px;">
+                    @if (User == null)
+                    {
+                        <strong> <span class="hidden-xs" style="color:#fff;">Internal Department Portal</span></strong>
+
+                    }
+                    else
+                    {
+                        <strong> <span class="hidden-xs" style="color:#fff;">Inventory Management System</span></strong>
+
+                    }
+
+                </div>
+                <div class="nav navbar-nav" style="margin-left:7%;margin-top: 17px;">
+                    <label style="color:white">@DateTime.UtcNow.ToShortDateString()</label>
+                    <label style="color:white; " id="time"></label>
+                </div>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+
+                    <ul class="nav navbar-nav">
+                        @if (User == null)
+                        {
+                            <div class="pull-right">
+                                <a href="@Url.Action("EmployeeInsert", "Home")" class="btn btn-default btn-flat">Register</a>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="pull-right">
+                                <a href="@Url.Action("LogOut", "Home" , new {Userr=User})" class="btn btn-default btn-flat">Sign out</a>
+                            </div>
+                        }
+                        <!-- Messages: style can be found in dropdown.less-->
+
+                    </ul>
+                </div>
+
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="~/tataaaaaalllogo.png" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>SMUEM CRM </p>
+                        @*<a href="#"><i class="fa fa-circle text-success"></i> Online</a>*@
+                    </div>
+                </div>
+
+                <!-- /.search form -->
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="header">MAIN NAVIGATION</li>
+                    @if (User != null && Category == "ALL")
+                    {
+                        <li class=" treeview">
+                            <a href="#">
+                                <i class="fa fa-home"></i> <span>Master</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="active"><a href="@Url.Action("Index","Home")"><i class="fa fa-desktop"></i> Dashboard</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>Inductor Reading</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="active"><a href="@Url.Action("ListofFuranceInductorReading","Home")"><i class="fa fa-circle-o"></i>Furance Inductor Reading</a></li>
+                                <li class="active"><a href="@Url.Action("FuranceInductorGraphPage","Home")"><i class="fa fa-circle-o"></i>Furance Inductor Graph</a></li>
+                            </ul>
+                        </li>
+                        @*<li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-laptop"></i>
+                                <span>Material-Issue</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="active"><a href="@Url.Action("MatrialIssue","Home")"><i class="fa fa-circle-o"></i>Issue </a></li>
+                                <li class="active"><a href="@Url.Action("AllMaterialIssue","Home")"><i class="fa fa-circle-o"></i>Issue List</a></li>
+
+                            </ul>
+                        </li>*@
+                       
+
+                    }
+                    else if (User != null && Category == "Normal")
+                    {
+                        <li class="active"><a href="@Url.Action("Index","Home")"><i class="fa fa-desktop"></i> Dashboard</a></li>
+                    }
+                    else if (User != null && Category == "Emergency")
+                    {
+                        <li class="active"><a href="@Url.Action("Index","Home")"><i class="fa fa-desktop"></i> Dashboard</a></li>
+                    }
+                   
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <!-- /.content-wrapper -->
+        <!-- Control Sidebar -->
+
+        @RenderBody()
+
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.0.0
+            </div>
+            <strong>Copyright &copy; 2024 <a href="#">TATA STEEL  || SMUEM CRM </a>.</strong> All rights
+            reserved.
+        </footer>
+        <!-- /.control-sidebar -->
+        <!-- Add the sidebar's background. This div must be placed
+        immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+
+    </div>
+    <!-- ./wrapper -->
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="/bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/dist/js/adminlte.min.js"></script>
+    <!-- Sparkline -->
+    <script src="/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    <!-- jvectormap  -->
+    <script src="/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- SlimScroll -->
+    <script src="/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- ChartJS -->
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    @*<script src="/dist/js/pages/dashboard2.js"></script>*@
+    <!-- AdminLTE for demo purposes -->
+    <script src="/dist/js/demo.js"></script>
+    <script>
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+
+        function startTime() {
+            var today = new Date();
+           
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            // add a zero in front of numbers<10
+            m = checkTime(m);
+            s = checkTime(s);
+            document.getElementById('time').innerHTML =  h + ":" + m + ":" + s;
+            t = setTimeout(function () {
+                startTime()
+            }, 500);
+        }
+        $(document).ready(function () {
+            startTime();
+        });
+
+    </script>
+    <script>
+        $.noConflict();
+    </script>
+</body>
+
+
+</html>
+

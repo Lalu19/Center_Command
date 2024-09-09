@@ -1,0 +1,57 @@
+C:\Users\Administrator\source\repos\NewInventoryProj\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll
+C:\Users\Administrator\source\repos\NewInventoryProj\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
+C:\Users\Administrator\source\repos\NewInventoryProj\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\NewInventoryProj\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
+C:\Users\Administrator\source\repos\NewInventoryProj\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb
+D:\KB_007\NewInventoryProj\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll
+D:\KB_007\NewInventoryProj\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
+D:\KB_007\NewInventoryProj\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csprojAssemblyReference.cache
+D:\KB_007\NewInventoryProj\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+D:\KB_007\NewInventoryProj\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
+D:\KB_007\NewInventoryProj\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb
+D:\KB_007\TSBSL_Projects\NewInventoryProj\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll
+D:\KB_007\TSBSL_Projects\NewInventoryProj\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
+D:\KB_007\TSBSL_Projects\NewInventoryProj\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csprojAssemblyReference.cache
+D:\KB_007\TSBSL_Projects\NewInventoryProj\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+D:\KB_007\TSBSL_Projects\NewInventoryProj\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
+D:\KB_007\TSBSL_Projects\NewInventoryProj\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb
+C:\Users\admin\Desktop\NEW INVENTORY\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll
+C:\Users\admin\Desktop\NEW INVENTORY\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
+C:\Users\admin\Desktop\NEW INVENTORY\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\NEW INVENTORY\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
+C:\Users\admin\Desktop\NEW INVENTORY\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb
+C:\Users\admin\Desktop\NEW INVENTORY\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csprojAssemblyReference.cache
+D:\KB_007\TSBSL_Projects\NewInventoryProj\BusinessLogicLayer\bin\Debug\System.ComponentModel.Annotations.dll
+D:\KB_007\TSBSL_Projects\NewInventoryProj\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CopyComplete
+C:\InventoryProject\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll
+C:\InventoryProject\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
+C:\InventoryProject\BusinessLogicLayer\bin\Debug\System.ComponentModel.Annotations.dll
+C:\InventoryProject\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+C:\InventoryProject\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CopyComplete
+C:\InventoryProject\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
+C:\InventoryProject\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb
+C:\InventoryProject\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csprojAssemblyReference.cache
+I:\Lalu\InventoryProject\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll
+I:\Lalu\InventoryProject\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
+I:\Lalu\InventoryProject\BusinessLogicLayer\bin\Debug\System.ComponentModel.Annotations.dll
+I:\Lalu\InventoryProject\BusinessLogicLayer\bin\Debug\zxing.dll
+I:\Lalu\InventoryProject\BusinessLogicLayer\bin\Debug\zxing.presentation.dll
+I:\Lalu\InventoryProject\BusinessLogicLayer\bin\Debug\zxing.xml
+I:\Lalu\InventoryProject\BusinessLogicLayer\bin\Debug\zxing.presentation.xml
+I:\Lalu\InventoryProject\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csprojAssemblyReference.cache
+I:\Lalu\InventoryProject\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+I:\Lalu\InventoryProject\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CopyComplete
+I:\Lalu\InventoryProject\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
+I:\Lalu\InventoryProject\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb
+I:\Lalu\Center Command\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll
+I:\Lalu\Center Command\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
+I:\Lalu\Center Command\BusinessLogicLayer\bin\Debug\System.ComponentModel.Annotations.dll
+I:\Lalu\Center Command\BusinessLogicLayer\bin\Debug\zxing.dll
+I:\Lalu\Center Command\BusinessLogicLayer\bin\Debug\zxing.presentation.dll
+I:\Lalu\Center Command\BusinessLogicLayer\bin\Debug\zxing.xml
+I:\Lalu\Center Command\BusinessLogicLayer\bin\Debug\zxing.presentation.xml
+I:\Lalu\Center Command\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csprojAssemblyReference.cache
+I:\Lalu\Center Command\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+I:\Lalu\Center Command\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CopyComplete
+I:\Lalu\Center Command\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
+I:\Lalu\Center Command\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb

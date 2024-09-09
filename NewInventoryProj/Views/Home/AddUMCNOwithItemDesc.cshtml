@@ -1,0 +1,256 @@
+﻿
+@{
+    ViewBag.Title = "AddUMCNOwithItemDesc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/assets/img/favicon.html">
+    <title>Set Budget</title>
+    <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+</head>
+<body>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Add UMCNO with ItemDesc
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="@Url.Action("ListofUMCNoWithItemDesc","Home")" class="btn btn-round btn-primary right-side"><i class="fa fa-list"> List</i></a>
+                </li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <!-- Horizontal Form -->
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title" style="margin-left:1%;">Add UMCNO with ItemDesc </h3>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-sm">
+                                + Add Bulk
+                            </button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="~/UMCBulkUploadTemplate.xlsx" id="cv" class="btn btn-default fa-file-excel" download><i class="fa fa-download"></i>Download Excel Format</a>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <table class="table table-responsive" style="margin-left:0%">
+                            <tr>
+                                <td>
+                                    <label for="exampleCity" class=""> UMC No</label>
+                                </td>
+
+                                <td>
+                                    <input name="UMCNo" id="UMCNo" type="text" style="color:black" class="form-control">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="exampleCity" class=""> Item Desc</label>
+                                </td>
+
+                                <td>
+                                    <input name="Itemdesc" id="Itemdesc" type="text" style="color:black" class="form-control">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <a><button class="mt-2 btn btn-primary btn round center" onclick="SetUMCno()">Create</button></a>
+                                    @*<input type="button" class="mt-2 btn btn-primary btn round center add-row" value="Add Row">*@
+
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <!-- /.box -->
+
+                </div>
+                <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+
+    <div class="modal fade" id="modal-sm">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Bulk Upload</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="ss">
+                    <div class="form-group">
+                        <p style="color:red;">CSV,XLSX file is acceptable</p>
+                        <input type="file" name="UploadedFile" id="fileUpload" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button class="btn btn-primary pull-right" type="button" onclick="Upload()">Upload</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery 3 -->
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- DataTables -->
+    <script src="/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/assets/Downloadablecdnlink/xlsx.full.min.js"></script>
+    <script src="~/bower_components/select2/dist/js/select2.full.min.js"></script>
+    <script>
+        function SetUMCno() {
+            var UMCNo = document.getElementById("UMCNo").value;
+            var Itemdesc = document.getElementById("Itemdesc").value;
+            $.ajax({
+                url: '/api/Inventory/SetUMCnowithItemDesc',
+                dataType: 'json',
+                type: 'Post',
+                data: { UMCNo: UMCNo, Itemdesc: Itemdesc },
+
+                success: function (data) {
+                    //var data = $.parseJSON(data);
+                    if (data == true) {
+                        alert("Successfully Added");
+                        location.reload();
+
+                    } else if (data === false) {
+                        alert("The UMC_No entered is already in the system");
+                    } else {
+                        alert("Something went wrong");
+                    }
+                }
+            })
+        }
+    </script>
+    <script>
+        function Upload() {
+            var fileUpload = document.getElementById("fileUpload");
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+([^)]+)\)+(.xls|.xlsx)$/;
+            if (regex.test(fileUpload.value.toLowerCase())) {
+                if (typeof (FileReader) != "undefined") {
+                    var reader = new FileReader();
+                    if (reader.readAsBinaryString) {
+                        reader.onload = function (e) {
+                            ProcessExcel(e.target.result);
+                        };
+                        reader.readAsBinaryString(fileUpload.files[0]);
+                    } else {
+                        reader.onload = function (e) {
+                            var data = "";
+                            var bytes = new Uint8Array(e.target.result);
+                            for (var i = 0; i < bytes.byteLength; i++) {
+                                data += String.fromCharCode(bytes[i]);
+                            }
+                            ProcessExcel(data);
+                        };
+                        reader.readAsArrayBuffer(fileUpload.files[0]);
+                    }
+                } else {
+                    alert("This browser does not support HTML5.");
+                }
+            }
+            else {
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
+                if (regex.test(fileUpload.value.toLowerCase())) {
+
+                    if (typeof (FileReader) != "undefined") {
+                        var reader = new FileReader();
+                        if (reader.readAsBinaryString) {
+                            reader.onload = function (e) {
+                                ProcessExcel(e.target.result);
+                            };
+                            reader.readAsBinaryString(fileUpload.files[0]);
+                        } else {
+                            reader.onload = function (e) {
+                                var data = "";
+                                var bytes = new Uint8Array(e.target.result);
+                                for (var i = 0; i < bytes.byteLength; i++) {
+                                    data += String.fromCharCode(bytes[i]);
+                                }
+                                ProcessExcel(data);
+                            };
+                            reader.readAsArrayBuffer(fileUpload.files[0]);
+                        }
+                    }
+                    else {
+                        alert("This browser does not support HTML5.");
+                    }
+                }
+                else {
+                    alert("Please upload a valid Excel file.");
+                }
+            }
+        }
+
+        function ProcessExcel(data) {
+            var UMCNo = [];
+            var Itemdesc = [];
+
+            var workbook = XLSX.read(data, {
+                type: 'binary'
+            });
+            var firstSheet = workbook.SheetNames[0];
+            var excelRows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[firstSheet]);
+
+            for (var i = 0; i < excelRows.length; i++) {
+                UMCNo.push(excelRows[i].UMCNo);
+                Itemdesc.push(excelRows[i].Itemdesc);
+
+            }
+            var dataa = {
+                UMCNo1: UMCNo,
+                Itemdesc1: Itemdesc
+
+            };
+            console.log(dataa);
+            $.ajax({
+                url: '/api/Inventory/UploadUMCBulkMaterial',
+                method: 'POST',
+                data: JSON.stringify(dataa),
+                contentType: 'application/json',
+                success: function (response) {
+                    console.log(response);
+                    if (response === "Success") {
+                        location.reload();
+                        alert("Excel Uploaded Successfully");
+                    } else {
+                        location.reload();
+                        alert("Failed to save UMC data. Please try again.");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log("An error occurred:");
+                    console.log("Status: " + status);
+                    console.log("Error: " + error);
+                    console.log(xhr.responseText);
+                    location.reload();
+                    alert("An error occurred while processing the data. Please try again.");
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

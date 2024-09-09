@@ -1,0 +1,458 @@
+﻿
+@{
+    ViewBag.Title = "ListofFuranceInductorAReading";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/assets/img/favicon.html">
+    <title>Sub-Location</title>
+    <link href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">*@
+    <style>
+        div.dataTables_wrapper div.dataTables_filter input {
+            margin-left: 0.5em;
+            display: inline-block;
+            width: 400px;
+        }
+
+        #CentralStore_Item {
+            transform: scale(1.3);
+        }
+    </style>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5); /* Transparent black overlay */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .close {
+            color: #161515;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 5px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                List of Furance Inductor Reading
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="@Url.Action("AddFURNACEINDUCTOREADINGA","Home")" class="btn btn-round btn-primary right-side"><i class="fa fa-plus"> Add</i></a>
+                </li>
+
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- /.box -->
+
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">  List of Furance Inductor Reading A</h3>
+                        </div>
+                        <div class="">
+
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="Empcodee" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Date of Reading</th>
+                                        <th>Power</th>
+                                        <th>Line AMPS</th>
+                                        <th>Line PF</th>
+                                        <th>Load AMPS</th>
+                                        <th>Load PF</th>
+                                        <th>Load Volts</th>
+                                        <th>Cond.Ratio</th>
+                                        <th>Bushing TempG1</th>
+                                        <th>Bushing TempG2</th>
+                                        <th>Bushing TempG3</th>
+                                        <th>Bushing TempG4</th>
+                                        <th>CurrentR</th>
+                                        <th>CurrentS</th>
+                                        <th>CurrentT</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="loader"></tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+        <div id="editFuranceinductorBModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="form-group">
+                    <label for="editDate">Date :</label>
+                    <input type="datetime-local" id="editDate" placeholder="Select Date">
+                </div>
+                <div class="form-group">
+                    <label for="editPower">Power :</label>
+                    <input type="number" min="0" id="editPower" placeholder="Power">
+                    <input type="hidden" id="editSno">
+                </div>
+                <div class="form-group">
+                    <label for="editLineAmps">Line AMPS :</label>
+                    <input type="number" min="0" id="editLineAmps" placeholder="Line AMPS">
+                </div>
+                <div class="form-group">
+                    <label for="editLinePF">Line PF :</label>
+                    <input type="number" min="0" id="editLinePF" placeholder="Line PF">
+                </div>
+                <div class="form-group">
+                    <label for="editLoadAMPS">Load AMPS :</label>
+                    <input type="number" min="0" id="editLoadAMPS" placeholder="Load AMPS">
+                </div>
+                <div class="form-group">
+                    <label for="editLoadPF">Load PF :</label>
+                    <input type="number" min="0" id="editLoadPF" placeholder="Load PF">
+                </div>
+                <div class="form-group">
+                    <label for="editLoadVolts">Load Volts :</label>
+                    <input type="number" min="0" id="editLoadVolts" placeholder="Load Volts">
+                </div>
+                <div class="form-group">
+                    <label for="editRatio">Cond.Ratio :</label>
+                    <input type="number" min="0" id="editRatio" placeholder="Cond.Ratio">
+                </div>
+                <div class="form-group">
+                    <label for="editTempG1">Bushing TempG1 :</label>
+                    <input type="number" min="0" id="editTempG1" placeholder="Bushing TempG1">
+                </div>
+                <div class="form-group">
+                    <label for="editTempG2">Bushing TempG2 :</label>
+                    <input type="number" min="0" id="editTempG2" placeholder="Bushing TempG2">
+                </div>
+                <div class="form-group">
+                    <label for="editTemp3">Bushing TempG3 :</label>
+                    <input type="number" min="0" id="editTempG3" placeholder="Bushing TempG3">
+                </div>
+                <div class="form-group">
+                    <label for="editTempG4">Bushing TempG4 :</label>
+                    <input type="number" min="0" id="editTempG4" placeholder="Bushing TempG4">
+                </div>
+                <div class="form-group">
+                    <label for="editCurrentR">CurrentR :</label>
+                    <input type="number" min="0" id="editCurrentR" placeholder="CurrentR">
+                </div>
+                <div class="form-group">
+                    <label for="editCurrentS">CurrentS :</label>
+                    <input type="number" min="0" id="editCurrentS" placeholder="CurrentS">
+                </div>
+                <div class="form-group">
+                    <label for="editCurrentT">CurrentT :</label>
+                    <input type="number" min="0" id="editCurrentT" placeholder="CurrentT">
+                </div>
+                <button id="saveChanges">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
+
+    <!-- DataTables -->
+    <script src="~/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $.ajax({
+                url: '/api/Inventory/AllFuranceReadingAData',
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+
+                    $('#Empcodee').find('tbody').empty();
+                    $.each(JSON.parse(data), function (i, val) {
+                        //// Format Entry Date
+                        //var DateofReading = new Date(val.DateofReading);
+                        //var DateofReadingFormatted = DateofReading.getDate() + "-";
+
+                        //if (DateofReading.getMonth() == 12) {
+                        //    DateofReadingFormatted += "-1-";
+                        //} else {
+                        //    var m = DateofReading.getMonth() + 1;
+                        //    DateofReadingFormatted += m + "-";
+                        //}
+                        //DateofReadingFormatted += DateofReading.getFullYear();
+
+                        var DateofReading = new Date(val.DateofReading);
+                        var DateofReadingFormatted = DateofReading.getDate() + "-";
+                        var hours = DateofReading.getHours();
+                        var minutes = ("0" + DateofReading.getMinutes()).slice(-2);
+                        var ampm = hours >= 12 ? 'PM' : 'AM';
+                        hours = hours % 12;
+                        hours = hours ? hours : 12;
+
+                        if (DateofReading.getMonth() == 12) {
+                            DateofReadingFormatted += "-1-";
+                        } else {
+                            var m = DateofReading.getMonth() + 1;
+                            DateofReadingFormatted += m + "-";
+                        }
+                        DateofReadingFormatted += DateofReading.getFullYear() + " " + hours + ":" + minutes + " " + ampm;
+
+                        var slno = i + 1;
+                        var text = "<tr style='background-color: #ffffff !important;'>";
+                        text = text
+                            //+ "<td class = ''>"
+                            //+ slno
+                            //+ "</td><td style= 'text-align: left;'>  <a href='#' class = 'UMCNo'>"
+                            //+ DateofReadingFormatted
+                            //+ "</a></td><td style= 'text-align: left;'>  <a href='#' class = 'Itemdesc'>"
+                            //+ val.Power
+                            //+ "</a></td><td style= 'text-align: left;'>  <a href='#' class = 'Itemdesc'>"
+                            //+ val.LineAMPS
+                            //+ "</a></td><td style= 'text-align: left;'>  <a href='#' class = 'Itemdesc'>"
+                            //+ val.LinePF
+                            //+ "</a></td><td style= 'text-align: left;'>  <a href='#' class = 'Itemdesc'>"
+                            //+ val.LoadAMPS
+                            //+ "</a></td><td style= 'text-align: left;'>  <a href='#' class = 'Itemdesc'>"
+                            //+ val.LoadPF
+                            //+ "</a></td><td style= 'text-align: left;'>  <a href='#' class = 'Itemdesc'>"
+                            //+ val.LoadVolts
+                            //+ "</a></td><td style= 'text-align: left;'>  <a href='#' class = 'Itemdesc'>"
+                            //+ val.Ratio
+                            //+ "</a></td><td style= 'text-align: left;'>  <a href='#' class = 'Itemdesc'>"
+                            //+ val.BushingTempG1
+                            //+ "</a></td><td style= 'text-align: left;'>  <a href='#' class = 'Itemdesc'>"
+                            //+ val.BushingTempG2
+                            //+ "</a></td><td style= 'text-align: left;'>  <a href='#' class = 'Itemdesc'>"
+                            //+ val.BushingTempG3
+                            //+ "</a></td><td style= 'text-align: left;'>  <a href='#' class = 'Itemdesc'>"
+                            //+ val.BushingTempG4
+                            //+ "</a></td><td style= 'text-align: left;'>  <a href='#' class = 'Itemdesc'>"
+                            //+ val.CurrentR
+                            //+ "</a></td><td style= 'text-align: left;'>  <a href='#' class = 'Itemdesc'>"
+                            //+ val.CurrentS
+                            //+ "</a></td><td style= 'text-align: left;'>  <a href='#' class = 'Itemdesc'>"
+                            //+ val.CurrentT
+                            //+ "</a></td> </tr>";
+
+                            + "<td class=''>" + slno + "</td>"
+                            + "<td style='text-align: left;'><a href='#' class='DateofReadingFormatted'>" + DateofReadingFormatted + "</a></td>"
+                            + "<td style='text-align: left;'><a href='#' class='Power'>" + val.Power + "</a></td>"
+                            + "<td style='text-align: left;'><a href='#' class='LineAMPS'>" + val.LineAMPS + "</a></td>"
+                            + "<td style='text-align: left;'><a href='#' class='LinePF'>" + val.LinePF + "</a></td>"
+                            + "<td style='text-align: left;'><a href='#' class='LinePF'>" + val.LoadAMPS + "</a></td>"
+                            + "<td style='text-align: left;'><a href='#' class='LinePF'>" + val.LoadPF + "</a></td>"
+                            + "<td style='text-align: left;'><a href='#' class='LinePF'>" + val.LoadVolts + "</a></td>"
+                            + "<td style='text-align: left;'><a href='#' class='LinePF'>" + val.Ratio + "</a></td>"
+                            + "<td style='text-align: left;'><a href='#' class='LinePF'>" + val.BushingTempG1 + "</a></td>"
+                            + "<td style='text-align: left;'><a href='#' class='LinePF'>" + val.BushingTempG2 + "</a></td>"
+                            + "<td style='text-align: left;'><a href='#' class='LinePF'>" + val.BushingTempG3 + "</a></td>"
+                            + "<td style='text-align: left;'><a href='#' class='LinePF'>" + val.BushingTempG4 + "</a></td>"
+                            + "<td style='text-align: left;'><a href='#' class='LinePF'>" + val.CurrentR + "</a></td>"
+                            + "<td style='text-align: left;'><a href='#' class='LinePF'>" + val.CurrentS + "</a></td>"
+                            + "<td style='text-align: left;'><a href='#' class='LinePF'>" + val.CurrentT + "</a></td>"
+                            + "<td>"
+                            + "<button onclick=\"editFuranceinductorBModal('" + val.FuranceInductorReadingAId + "','" + val.Power + "','" + val.LineAMPS + "','" + val.LinePF + "','" + val.LoadAMPS + "','" + val.LoadPF + "','" + val.LoadVolts + "','" + val.Ratio + "','" + val.BushingTempG1 + "','" + val.BushingTempG2 + "','" + val.BushingTempG3 + "','" + val.BushingTempG4 + "','" + val.CurrentR + "','" + val.CurrentS + "','" + val.CurrentT + "','" + val.DateofReading + "')\" class='btn btn-primary' data-toggle='modal' data-target='#editFuranceinductorBModal'>Edit</button>"
+                            + "</td>"
+                            + "</tr>";
+
+                        $('#Empcodee').find('tbody').append(text);
+
+                    });
+                    $('#Empcodee').dataTable(
+                        {
+                            "lengthMenu": [[10, 15, 20, -1],
+                            [10, 15, 20, "All"]],
+                            autoWidth: false,
+                            responsive: true,
+
+
+                            "drawCallback": function (settings) {
+
+                                $('[data-toggle="tooltip"]').tooltip({
+                                    container: 'body'
+                                })
+                            },
+                        });
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            // Close modal when clicking on the close button
+            $('.close').on('click', function () {
+                $('#editFuranceinductorBModal').hide();
+                location.reload();
+            });
+        });
+    </script>
+    <script>
+        function editFuranceinductorBModal(FuranceInductorReadingAId, Power, LineAMPS, LinePF, LoadAMPS, LoadPF, LoadVolts, Ratio, BushingTempG1, BushingTempG2, BushingTempG3, BushingTempG4, CurrentR, CurrentS, CurrentT, DateofReading ) {
+            $('#editSno').val(FuranceInductorReadingAId);
+            $('#editPower').val(Power);
+            $('#editLineAmps').val(LineAMPS);
+            $('#editLinePF').val(LinePF);
+            $('#editLoadAMPS').val(LoadAMPS);
+            $('#editLoadPF').val(LoadPF);
+            $('#editLoadVolts').val(LoadVolts);
+            $('#editRatio').val(Ratio);
+            $('#editTempG1').val(BushingTempG1);
+            $('#editTempG2').val(BushingTempG2);
+            $('#editTempG3').val(BushingTempG3);
+            $('#editTempG4').val(BushingTempG4);
+            $('#editCurrentR').val(CurrentR);
+            $('#editCurrentS').val(CurrentS);
+            $('#editCurrentT').val(CurrentT);
+            $('#editDate').val(DateofReading);
+
+            console.log("Original DateofReading:", DateofReading);
+
+            var date = new Date(DateofReading);
+
+            //if (!isNaN(date.getTime())) {
+            //    // Get the local date string in YYYY-MM-DD format
+            //    var options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+            //    var formattedDate = date.toLocaleDateString('en-CA', options); // 'en-CA' gives YYYY-MM-DD format
+            //    $('#editDate').val(formattedDate);
+            //} else {
+            //    console.error("Invalid date format:", BudgetDate);
+            //    $('#editDate').val('');
+            //}
+            if (!isNaN(date.getTime())) {
+                // Get the local date and time in the format YYYY-MM-DDTHH:MM
+                var localDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
+                var formattedDate = localDate.toISOString().slice(0, 16);
+                $('#editDate').val(formattedDate);
+            } else {
+                console.error("Invalid date format:", DateofReading);
+                $('#editDate').val('');
+            }
+
+        }
+
+        $('#saveChanges').on('click', function () {
+            var FuranceInductorReadingAId = parseInt($('#editSno').val());
+            var Power = parseFloat($('#editPower').val());
+            var LineAMPS = parseFloat($('#editLineAmps').val());
+            var LinePF = parseFloat($('#editLinePF').val());
+            var LoadAMPS = $('#editLoadAMPS').val();
+            var LoadPF = $('#editLoadPF').val();
+            var LoadVolts = $('#editLoadVolts').val();
+            var Ratio = $('#editRatio').val();
+            var BushingTempG1 = $('#editTempG1').val();
+            var BushingTempG2 = $('#editTempG2').val();
+            var BushingTempG3 = $('#editTempG3').val();
+            var BushingTempG4 = $('#editTempG4').val();
+            var CurrentR = $('#editCurrentR').val();
+            var CurrentS = $('#editCurrentS').val();
+            var CurrentT = $('#editCurrentT').val();
+            var DateofReading = $('#editDate').val();
+
+            var data = {
+                FuranceInductorReadingAId: FuranceInductorReadingAId,
+                Power: Power,
+                LineAMPS: LineAMPS,
+                LinePF: LinePF,
+                LoadAMPS: LoadAMPS,
+                LoadPF: LoadPF,
+                LoadVolts: LoadVolts,
+                Ratio: Ratio,
+                BushingTempG1: BushingTempG1,
+                BushingTempG2: BushingTempG2,
+                BushingTempG3: BushingTempG3,
+                BushingTempG4: BushingTempG4,
+                CurrentR: CurrentR,
+                CurrentS: CurrentS,
+                CurrentT: CurrentT,
+                DateofReading: DateofReading
+            };
+
+            $.ajax({
+                url: '/api/Inventory/UpdateFurnaceInductorA',
+                type: 'POST',
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                success: function (response) {
+                    alert(response);
+                    $('#editFuranceinductorBModal').hide();
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                    alert("Failed to update Furnace Inductor A Data.");
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>

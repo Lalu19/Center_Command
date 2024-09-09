@@ -1,0 +1,419 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css" />
+<!-- IonIcons -->
+<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<script></script>
+<style>
+    * {
+        font-family: 'open sans';
+    }
+
+    #contain {
+        height: 300px;
+        overflow-y: scroll;
+    }
+
+    #table_scroll {
+        width: 100%;
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
+
+        #table_scroll tbody td {
+            padding: 10px;
+            background-color: #7fe55e;
+            color: #fff;
+        }
+
+    #table_fixed thead th {
+        padding: 10px;
+        background-color: #0b12e0;
+        color: #fff;
+        font-weight: 100;
+    }
+
+    .info-box-content {
+        display: flex;
+        align-items: center;
+    }
+
+    .info-box-text, .info-box-number {
+        margin-right: 10px;
+    }
+
+    .info-box-content {
+        padding: 2px 10px;
+        margin-left: 90px;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 0px;
+        font-weight: 700;
+    }
+</style>
+<div class="content-wrapper" style="min-height: 100em;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Dashboard
+
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        @*<div id="storeauditmsg">
+                <marquee scrollamount="2" style="color: orange" bgcolor="black"><strong>FY-25&nbsp;&nbsp;&nbsp;CURRENT&nbsp;&nbsp;&nbsp;MONTH&nbsp;&nbsp;&nbsp;DATA</strong></marquee>
+            </div>*@
+        @*<div class="col-md-12" style="color: orange;background-color: black;padding: 4px 0px 0px 550px;">
+                    <label class="form-label" style="color: orange" background-color="black"><strong>FY-25&nbsp;&nbsp;&nbsp;CURRENT&nbsp;&nbsp;&nbsp;MONTH&nbsp;&nbsp;&nbsp;DATA</strong></label>
+            </div>*@
+        <div class="col-md-12" id="fiscalYearLabel" style="color: orange; background-color: black; padding: 4px 0px 0px 505px;">
+            <label class="form-label" style="color: orange; background-color: black;">
+                <strong id="fiscalYearText"></strong>&nbsp;&nbsp;&nbsp;CURRENT&nbsp;&nbsp;&nbsp;MONTH&nbsp;&nbsp;&nbsp;DATA &nbsp;&nbsp;&nbsp;(&nbsp;<span id="currentMonth"></span>&nbsp;)
+            </label>
+        </div>
+        <!-- Info boxes -->
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12" style="padding-top: 6px;">
+                <div class="info-box">
+
+                    <span class="info-box-icon bg-red" style="width:49px;"><i class="fa fa-pie-chart"></i></span>
+                    <div class="info-box-content" style="margin-left:42px;">
+                        <span class="info-box-text" style="display: inline-block; width: 200px;">Total Budget Allocation:</span>
+                        <span class="info-box-number" id="totalbudgettt">00</span>
+
+                        <span class="info-box-text" style="display: inline-block; width: 150px; padding-left: 70px;">YTD:</span>
+                        <span class="info-box-number" id="ytdtotalbudgettt">00</span>
+                    </div>
+                    <div class="info-box-content" style="margin-left:42px;">
+                        <span class="info-box-text" style="display: inline-block; width: 200px;">Total Material Cost:</span>
+                        <span class="info-box-number" id="totalmateriall">00</span>
+
+                        <span class="info-box-text" style="display: inline-block; width: 150px; padding-left: 70px;">YTD:</span>
+                        <span class="info-box-number" id="ytdtotalmateriall">00</span>
+                    </div>
+                    <div class="info-box-content" style="margin-left:42px;">
+                        <span class="info-box-text" style="display: inline-block; width: 208px;">Total Service Cost:</span>
+                        <span class="info-box-number" id="totalservicee">00</span>
+
+                        <span class="info-box-text" style="display: inline-block; width: 150px; padding-left: 70px;">YTD:</span>
+                        <span class="info-box-number" id="ytdtotalservicee">00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12" style="padding-top: 6px;">
+                <div class="info-box">
+                    <span class="info-box-icon bg-aqua" style="width:49px;"><i class="fa fa-calendar"></i></span>
+
+                    <div class="info-box-content" style="margin-left:42px;">
+                        <span class="info-box-text" style="display: inline-block; width: 237px;">Current Month Target:</span>
+                        <span class="info-box-number" id="BudgetAmt">00</span>
+
+                        <span class="info-box-text" style="display: inline-block; width: 150px; padding-left: 70px;">YTD:</span>
+                        <span class="info-box-number" id="ytdtotaltargetert">00</span>
+                    </div>
+                    <div class="info-box-content" style="margin-left:42px;">
+                        <span class="info-box-text" style="display: inline-block; width: 237px;">Current Month Material Cost:</span>
+                        <span class="info-box-number" id="CmMc">00</span>
+
+                        <span class="info-box-text" style="display: inline-block; width: 150px; padding-left: 70px;">YTD:</span>
+                        <span class="info-box-number" id="ytdCmMc">00</span>
+                    </div>
+                    <div class="info-box-content" style="margin-left:42px;">
+                        <span class="info-box-text" style="display: inline-block; width: 237px;">Current Month Service Cost:</span>
+                        <span class="info-box-number" id="CmSc">00</span>
+
+                        <span class="info-box-text" style="display: inline-block; width: 150px; padding-left: 70px;">YTD:</span>
+                        <span class="info-box-number" id="ytdCmSc">00</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <!--<div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red" style="width:49px;"><i class="fa fa-hand-grab-o"></i></span>
+
+                <div class="info-box-content" style="margin-left:42px;">
+                    <span class="info-box-text">Total Amount <br /> Purchased</span>
+                    <span class="info-box-number" id="receiveAmt">00</span>
+                </div>-->
+            <!-- /.info-box-content -->
+            <!--</div>-->
+            <!-- /.info-box -->
+            <!--</div>-->
+            <input type="hidden" id="hididbudgetamt" name="hididbudgetamt" />
+            <input type="hidden" id="hididreceiveamt" name="hididreceiveamt" />
+
+            <!-- /.col -->
+            <!-- fix for small devices only -->
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12" style="padding-top: 6px;">
+                <div class="info-box">
+                    <span class="info-box-icon bg-green" style="width:49px;"><i class="fa fa-archive"></i></span>
+
+                    @*<div class="info-box-content" style="margin-left:42px;">
+                            <span class="info-box-text">Rest Amount of <br />Current Month</span>
+                            <span class="info-box-number" id="restamount">00</span>
+                        </div>*@
+                    <div class="info-box-content" style="margin-left:42px;padding-top: 16px;">
+                        <span class="info-box-text" style="display: inline-block; width: 358px;">Total Quantity Available in Local Inventory:</span>
+                        <span class="info-box-number" id="totalstockk">00</span>
+
+                    </div>
+                    <div class="info-box-content" style="margin-left:42px;">
+                        <span class="info-box-text" style="display: inline-block; width: 358px;">Total Price Present in Local Inventory:</span>
+                        <span class="info-box-number" id="totalpricee">00</span>
+
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6 col-sm-6 col-xs-12" style="padding-top: 6px;">
+                <div class="info-box">
+                    <span class="info-box-icon bg-yellow" style="width:49px;"><i class="ion ion-ios-cart-outline"></i></span>
+
+                    @*<div class="info-box-content" style="margin-left:42px;">
+                            <span class="info-box-text">Total <br />Purchase</span>
+                            <span class="info-box-number" id="TotalPurchase">00</span>
+                        </div>*@
+                    <div class="info-box-content" style="margin-left:42px;padding-top: 31px;">
+                        <span class="info-box-text" style="display: inline-block; width: 200px;">Inventory:</span>
+                        @*<span class="info-box-number" id="invenn">00</span>*@
+                        <span class="info-box-number">10 Cr</span>
+
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        <!--PREVIOUS YEAR DATA MONTH WISE-->
+        <div class="col-lg-12">
+
+            <div class="col-lg-12">
+                @*<div id="storeauditmsg1">
+                        <marquee scrollamount="2" style="color: lawngreen" bgcolor="black"><strong>FY-25&nbsp;&nbsp;&nbsp;MONTHLY&nbsp;&nbsp;&nbsp;TOTAL&nbsp;&nbsp;&nbsp;BUDGET</strong></marquee>
+                    </div>*@
+
+                <div class="col-md-12" id="fiscalYearLabel" style="color: lawngreen;background-color: black;padding: 0px 0px 0px 475px;">
+                    @*<label class="form-label" style="color: lawngreen" background-color="black"><strong>FY-25&nbsp;&nbsp;&nbsp;MONTHLY&nbsp;&nbsp;&nbsp;TOTAL&nbsp;&nbsp;&nbsp;BUDGET</strong></label>*@
+                    <label class="form-label" style="color: lawngreen; background-color: black;">
+                        <strong id="fiscalYearTextt"></strong>&nbsp;&nbsp;&nbsp;MONTHLY&nbsp;&nbsp;&nbsp;TOTAL&nbsp;&nbsp;&nbsp;BUDGET &nbsp;&nbsp;&nbsp;(&nbsp;<span id="currentMonthh"></span>&nbsp;)
+                    </label>
+                </div>
+
+                <div class="card-body">
+                    <div class="d-flex">
+                        <center>Total Monthly Expenditure Data</center>
+                    </div>
+
+                    <div class="position-relative mb-4">
+                        <canvas id="sales-chart" height="200"></canvas>
+                    </div>
+
+                    <div class="d-flex flex-row justify-content-end">
+                        <span class="mr-2">
+                            <i class="fas fa-square " style="color:#007bff !important;"></i> Monthly Target Cost
+                        </span>
+
+                        <span>
+                            <i class="fas fa-square " style=" color: #6b430c !important;"></i> Monthly Actual Cost
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--END-->
+        @*material month wise cost data show in graph*@
+
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                @*<div id="storeauditmsg1">
+                        <marquee scrollamount="2" style="color: lawngreen" bgcolor="black"><strong>FY-25&nbsp;&nbsp;&nbsp;MONTHLY&nbsp;&nbsp;&nbsp;MATERIALCOST&nbsp;&nbsp;&nbsp;BUDGET</strong></marquee>
+                    </div>*@
+                <div class="col-md-12" id="fiscalYearLabel" style="color: lawngreen;background-color: black;padding: 0px 0px 0px 128px;">
+                    @*<label class="form-label" style="color: lawngreen" background-color="black"><strong>FY-25&nbsp;&nbsp;&nbsp;MONTHLY&nbsp;&nbsp;&nbsp;MATERIALCOST&nbsp;&nbsp;&nbsp;BUDGET</strong></label>*@
+                    <label class="form-label" style="color: lawngreen; background-color: black;">
+                        <strong id="fiscalYearTexttt"></strong>&nbsp;&nbsp;&nbsp;MONTHLY&nbsp;&nbsp;&nbsp;MATERIALCOST&nbsp;&nbsp;&nbsp;BUDGET&nbsp;&nbsp;&nbsp;(&nbsp;<span id="currentMonthhh"></span>&nbsp;)
+                    </label>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex">
+                        <center>Furance Inductor Reading</center>
+                    </div>
+
+                    <div class="position-relative mb-4">
+                        <canvas id="sales-chart8" height="200"></canvas>
+                    </div>
+
+                    <div class="d-flex flex-row justify-content-end">
+                        <span>
+                            <i class="fas fa-square " style=" color: #3a556e !important;"></i> Power
+                        </span>
+                        <span>
+                            <i class="fas fa-square" style="color: #c19970 !important;"></i> LineAMPS
+                        </span>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-lg-6">
+                <div class="col-md-12" id="fiscalYearLabel" style="color: lawngreen;background-color: black;padding: 0px 0px 0px 134px;">
+                    <label class="form-label" style="color: lawngreen; background-color: black;">
+                        <strong id="fiscalYearTextttt"></strong>&nbsp;&nbsp;&nbsp;MONTHLY&nbsp;&nbsp;&nbsp;SERVICECOST&nbsp;&nbsp;&nbsp;BUDGET&nbsp;&nbsp;&nbsp;(&nbsp;<span id="currentMonthhhh"></span>&nbsp;)
+                    </label>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex">
+                        <center>Total Monthly ServiceCost Expenditure Data</center>
+                    </div>
+
+                    <div class="position-relative mb-4">
+                        <canvas id="sales-chart9" height="200"></canvas>
+                    </div>
+
+                    <div class="d-flex flex-row justify-content-end">
+                        <span>
+                            <i class="fas fa-square " style=" color: #3a556e !important;"></i> Service Cost
+                        </span>
+                        <span>
+                            <i class="fas fa-square" style="color: #76ae5d !important;"></i> Service Actual Cost
+                        </span>
+                    </div>
+                </div>
+            </div>*@
+
+        </div>
+
+        <div class="col-lg-12">
+
+            <div class="col-lg-12">
+                <div class="col-md-12" id="fiscalYearLabel" style="color: lawngreen;background-color: black;padding: 0px 0px 0px 430px;">
+                    <label class="form-label" style="color: lawngreen; background-color: black;">
+                        <strong id="fiscalYearTexttttt"></strong>&nbsp;&nbsp;&nbsp;MONTHLY&nbsp;&nbsp;&nbsp;TOTAL&nbsp;&nbsp;&nbsp;INVENTORY&nbsp;&nbsp;&nbsp;BUDGET &nbsp;&nbsp;&nbsp;(&nbsp;<span id="currentMonthhhhh"></span>&nbsp;)
+                    </label>
+                </div>
+
+                <div class="card-body">
+                    <div class="d-flex">
+                        <center>Total Monthly Inventory Expenditure Data</center>
+                    </div>
+
+                    <div class="position-relative mb-4">
+                        <canvas id="sales-chart10" height="200"></canvas>
+                    </div>
+
+                    <div class="d-flex flex-row justify-content-end">
+                        <span>
+                            <i class="fas fa-square " style=" color: #e84a73 !important;"></i> Inventory Fixed Cost
+                        </span>
+                        <span>
+                            <i class="fas fa-square" style="color: #799fc2 !important;"></i> Inventory Actual Cost
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<script>
+    var currentYear = new Date().getFullYear();
+    // Calculate the Finance Year (FY) based on fiscal year running from April to March
+    var month = new Date().getMonth();
+    var fiscalYear = "FY-" + (currentYear - 2000 + (month >= 3 ? 1 : 0));
+    var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+        "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+    ];
+    var currentMonthName = monthNames[new Date().getMonth()];
+
+    document.getElementById("fiscalYearText").textContent = fiscalYear;
+    document.getElementById("currentMonth").textContent = currentMonthName;
+</script>
+<script>
+    var currentYear = new Date().getFullYear();
+    // Calculate the Finance Year (FY) based on fiscal year running from April to March
+    var month = new Date().getMonth();
+    var fiscalYear = "FY-" + (currentYear - 2000 + (month >= 3 ? 1 : 0));
+    var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+        "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+    ];
+    var currentMonthName = monthNames[new Date().getMonth()];
+    document.getElementById("fiscalYearTextt").textContent = fiscalYear;
+    document.getElementById("currentMonthh").textContent = currentMonthName;
+</script>
+<script>
+    var currentYear = new Date().getFullYear();
+    // Calculate the Finance Year (FY) based on fiscal year running from April to March
+    var month = new Date().getMonth();
+    var fiscalYear = "FY-" + (currentYear - 2000 + (month >= 3 ? 1 : 0));
+    var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+        "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+    ];
+    var currentMonthName = monthNames[new Date().getMonth()];
+    document.getElementById("fiscalYearTexttt").textContent = fiscalYear;
+    document.getElementById("currentMonthhh").textContent = currentMonthName;
+</script>
+<script>
+    var currentYear = new Date().getFullYear();
+    // Calculate the Finance Year (FY) based on fiscal year running from April to March
+    var month = new Date().getMonth();
+    var fiscalYear = "FY-" + (currentYear - 2000 + (month >= 3 ? 1 : 0));
+    var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+        "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+    ];
+    var currentMonthName = monthNames[new Date().getMonth()];
+    document.getElementById("fiscalYearTextttt").textContent = fiscalYear;
+    document.getElementById("currentMonthhhh").textContent = currentMonthName;
+</script>
+<script>
+    var currentYear = new Date().getFullYear();
+    // Calculate the Finance Year (FY) based on fiscal year running from April to March
+    var month = new Date().getMonth();
+    var fiscalYear = "FY-" + (currentYear - 2000 + (month >= 3 ? 1 : 0));
+    var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+        "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+    ];
+    var currentMonthName = monthNames[new Date().getMonth()];
+    document.getElementById("fiscalYearTexttttt").textContent = fiscalYear;
+    document.getElementById("currentMonthhhhh").textContent = currentMonthName;
+</script>
+<script src="~/jquery.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+@*<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>*@
+@*<script src="~/bower_components/jquery/dist/jquery.min.js"></script>*@
+
+<script src="~/plugins/chart.js/Chart.min.js"></script>
+<script src="~/Scripts/DrawPieChart.js"></script>
+<script src="~/Scripts/IndexDataScript.js"></script>
+<script src="~/dist/js/pages/dashboard3.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom-buttons"></script>
+

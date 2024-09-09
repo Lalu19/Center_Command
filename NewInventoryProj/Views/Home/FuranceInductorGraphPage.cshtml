@@ -1,0 +1,479 @@
+﻿
+@{
+    ViewBag.Title = "FuranceInductorGraphPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = null;
+}
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css" />
+<!-- IonIcons -->
+<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<style>
+    * {
+        font-family: 'open sans';
+    }
+
+    #contain {
+        height: 300px;
+        overflow-y: scroll;
+    }
+
+    #table_scroll {
+        width: 100%;
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
+
+        #table_scroll tbody td {
+            padding: 10px;
+            background-color: #7fe55e;
+            color: #fff;
+        }
+
+    #table_fixed thead th {
+        padding: 10px;
+        background-color: #0b12e0;
+        color: #fff;
+        font-weight: 100;
+    }
+
+    .info-box-content {
+        display: flex;
+        align-items: center;
+    }
+
+    .info-box-text, .info-box-number {
+        margin-right: 10px;
+    }
+
+    .info-box-content {
+        padding: 2px 10px;
+        margin-left: 90px;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 0px;
+        font-weight: 700;
+    }
+</style>
+
+<style>
+    .tabs {
+        margin-bottom: 20px;
+    }
+
+    .tab-button {
+        padding: 10px 15px;
+        margin-right: 5px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+        .tab-button:hover {
+            background-color: #0056b3;
+        }
+
+    .tab-content {
+        margin-top: 20px;
+    }
+    .card-body > .breadcrumbbb {
+        float: right;
+        background: transparent;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 2px;
+        padding: 5px 10px;
+        position: absolute;
+       /* top: 98px;*/
+        right: 17px;
+        border-radius: 2px;
+    }
+</style>
+<div class="content-wrapper" style="min-height: 100em;">
+    <section class="content-header">
+        <h1>Furance Inductor Graph Page</h1>
+        @*<ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("AddFURNACEINDUCTOREADING","Home")" class="btn btn-round btn-primary right-side"><i class="fa fa-plus"> Add</i></a>
+                <a href="@Url.Action("ListofFuranceInductorReading","Home")" class="btn btn-round btn-primary right-side"><i class="fa fa-list"> List</i></a>
+            </li>
+        </ol>*@
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        @*<div class="col-md-12" style="color: orange;background-color: black;padding: 4px 0px 0px 580px;">
+            <label class="form-label" style="color: orange"><strong>Furance&nbsp;&nbsp;&nbsp;Inductor&nbsp;&nbsp;&nbsp;Graph</strong></label>
+        </div>*@
+
+        <div class="tabs">
+            <button class="tab-button" onclick="showTab('tab1')">Inductor A</button>
+            <button class="tab-button" onclick="showTab('tab2')">Inductor B</button>
+            <button class="tab-button" onclick="showTab('tab3')">Inductor C</button>
+        </div>
+
+        <div id="tab1" class="tab-content">
+            <div class="col-lg-12">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <center>Furance Inductor A Reading</center>
+                    </div>
+                    <ol class="breadcrumbbb">
+                        <li>
+                            <a href="@Url.Action("AddFURNACEINDUCTOREADING","Home")" class="btn btn-round btn-primary right-side"><i class="fa fa-plus"> Add</i></a>
+                            <a href="@Url.Action("ListofFuranceInductorReading","Home")" class="btn btn-round btn-primary right-side"><i class="fa fa-list"> List</i></a>
+                        </li>
+                    </ol>
+                    <div class="d-flex flex-row justify-content-end">
+                        <label for="fromDate">From Date:</label>
+                        <input type="date" id="fromDate"> &nbsp; &nbsp; &nbsp; &nbsp;
+                        <label for="toDate">To Date:</label>
+                        <input type="date" id="toDate"> &nbsp; &nbsp; &nbsp; &nbsp;
+                        <button id="generateChartButton">Generate Chart</button>
+                    </div>
+                    &nbsp;   &nbsp;   &nbsp;   &nbsp;  &nbsp;   &nbsp;   &nbsp;   &nbsp;  &nbsp;   &nbsp;   &nbsp;   &nbsp;  &nbsp;   &nbsp;   &nbsp;   &nbsp;  &nbsp;   &nbsp;   &nbsp;   &nbsp;  &nbsp;   &nbsp;   &nbsp;   &nbsp;  &nbsp;   &nbsp;   &nbsp;   &nbsp;  &nbsp;   &nbsp;   &nbsp;   &nbsp;  &nbsp;   &nbsp;   &nbsp;   &nbsp;  &nbsp;   &nbsp;   &nbsp;   &nbsp;  &nbsp;   &nbsp;   &nbsp;   &nbsp;
+                    <div class="position-relative mb-4" style="height: 400px;">
+                        <canvas id="sales-chart8" height="200"></canvas>
+                    </div>
+                    <div class="d-flex flex-row justify-content-end">
+                        <span>
+                            <i class="fas fa-square" style="color: #3a556e !important;"></i> Power
+                        </span>
+                        &nbsp;   &nbsp;
+                        <span>
+                            <i class="fas fa-square" style="color: #c19970 !important;"></i> Line AMPS
+                        </span>
+                        &nbsp;   &nbsp;
+                        <span>
+                            <i class="fas fa-square" style="color: #ffcc00 !important;"></i> Line PF
+                        </span>
+                        &nbsp;   &nbsp;
+                        <span>
+                            <i class="fas fa-square" style="color: #66ccff !important;"></i> Load AMPS
+                        </span>
+                        &nbsp;   &nbsp;
+                        <span>
+                            <i class="fas fa-square" style="color: #ff5733 !important;"></i> Load PF
+                        </span>
+                        &nbsp;   &nbsp;
+                        <span>
+                            <i class="fas fa-square" style="color: #33ff57 !important;"></i> Load Volts
+                        </span>
+                        &nbsp;   &nbsp;
+                        <span>
+                            <i class="fas fa-square" style="color: #3357ff !important;"></i> Cond.Ratio
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab2" class="tab-content" style="display:none;">
+            <div class="col-lg-12">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <center>Furance Inductor B Reading</center>
+                    </div>
+                    <ol class="breadcrumbbb">
+                        <li>
+                            <a href="@Url.Action("AddFURNACEINDUCTOREADING","Home")" class="btn btn-round btn-primary right-side"><i class="fa fa-plus"> Add</i></a>
+                            <a href="@Url.Action("ListofFuranceInductorReading","Home")" class="btn btn-round btn-primary right-side"><i class="fa fa-list"> List</i></a>
+                        </li>
+                    </ol>
+                    <div class="d-flex flex-row justify-content-end">
+                        <label for="fromDate">From Date:</label>
+                        <input type="date" id="fromDate"> &nbsp; &nbsp; &nbsp; &nbsp;
+                        <label for="toDate">To Date:</label>
+                        <input type="date" id="toDate"> &nbsp; &nbsp; &nbsp; &nbsp;
+                        <button id="generateChartButton">Generate Chart</button>
+                    </div>
+                    <div class="position-relative mb-4" style="height: 400px;">
+                        <canvas id="sales-chart8" height="200"></canvas>
+                    </div>
+                    <div class="d-flex flex-row justify-content-end">
+                        <span><i class="fas fa-square" style="color: #3a556e !important;"></i> Power </span> &nbsp; &nbsp;
+                        <span><i class="fas fa-square" style="color: #c19970 !important;"></i> Line AMPS </span> &nbsp; &nbsp;
+                        <span><i class="fas fa-square" style="color: #ffcc00 !important;"></i> Line PF </span> &nbsp; &nbsp;
+                        <span><i class="fas fa-square" style="color: #66ccff !important;"></i> Load AMPS </span> &nbsp; &nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab3" class="tab-content" style="display:none;">
+           
+           
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+
+
+<script>
+    function showTab(tabId) {
+        // Hide all tab content
+        var tabs = document.getElementsByClassName("tab-content");
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].style.display = "none";
+        }
+        document.getElementById(tabId).style.display = "block";
+    }
+    showTab('tab1');
+</script>
+
+
+<script src="~/jquery.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="~/plugins/chart.js/Chart.min.js"></script>
+<script src="~/Scripts/DrawPieChart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom-buttons"></script>
+
+
+<script>
+    $(function () {
+
+        'use strict'
+
+        $('#generateChartButton').click(function () {
+            var fromDate = $('#fromDate').val();
+            var toDate = $('#toDate').val();
+
+            $.ajax({
+                url: '/api/Inventory/GetFuranceInductorReading?fromDate=' + fromDate + '&toDate=' + toDate,
+                type: 'POST',
+                success: function (response) {
+                    console.log(response);
+                    var date = response.map(item => item.Date);
+                    var Power = response.map(item => item.Power);
+                    var LineAMPS = response.map(item => item.LineAMPS);
+                    var LinePF = response.map(item => item.LinePF);
+                    var LoadAMPS = response.map(item => item.LoadAMPS);
+                    var LoadPF = response.map(item => item.LoadPF);
+                    var LoadVolts = response.map(item => item.LoadVolts);
+                    var Ratio = response.map(item => item.Ratio);
+
+                    // Check if the chart object exists and destroy it
+                    if (window.salesChart8) {
+                        window.salesChart8.destroy();
+                    }
+
+                    generateChart8(date, Power, LineAMPS, LinePF, LoadAMPS, LoadPF, LoadVolts, Ratio);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching data:', error);
+                }
+            });
+        });
+
+        var ticksStyle = {
+            fontColor: '#495057',
+            fontStyle: 'bold'
+        }
+
+        var mode = 'index'
+        var intersect = true
+        function generateChart8(date, Power, LineAMPS, LinePF, LoadAMPS, LoadPF, LoadVolts, Ratio) {
+            //var $salesChart = $('#sales-chart8');
+            var ctx = document.getElementById('sales-chart8').getContext('2d');
+            // Convert date strings to Date objects and then format them to 'YYYY-MM-DD'
+            var formattedDates = date.map(d => {
+                var dateObj = new Date(d);
+                return dateObj.toISOString().split('T')[0]; // Get only the date part
+            });
+
+
+            // var salesChart = new Chart($salesChart, {
+            window.salesChart8 = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: formattedDates,
+                    datasets: [
+                        {
+                            label: 'Power',
+                            backgroundColor: '#3a556e',
+                            borderColor: '#3a556e',
+                            data: Power,
+                            fill: false
+                        },
+                        {
+                            label: 'LineAMPS',
+                            backgroundColor: '#c19970',
+                            borderColor: '#c19970',
+                            data: LineAMPS,
+                            fill: false
+                        },
+                        {
+                            label: 'LinePF',
+                            backgroundColor: '#ffcc00',
+                            borderColor: '#ffcc00',
+                            data: LinePF,
+                            fill: false
+                        },
+                        {
+                            label: 'LoadAMPS',
+                            backgroundColor: '#66ccff',
+                            borderColor: '#66ccff',
+                            data: LoadAMPS,
+                            fill: false
+                        },
+                        {
+                            label: 'LoadPF',
+                            backgroundColor: '#ff5733',
+                            borderColor: '#ff5733',
+                            data: LoadPF,
+                            fill: false
+                        },
+                        {
+                            label: 'LoadVolts',
+                            backgroundColor: '#33ff57',
+                            borderColor: '#33ff57',
+                            data: LoadVolts,
+                            fill: false
+                        },
+                        {
+                            label: 'Cond.Ratio',
+                            backgroundColor: '#3357ff',
+                            borderColor: '#3357ff',
+                            data: Ratio,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    tooltips: {
+                        mode: 'index',
+                        intersect: true
+                    },
+                    hover: {
+                        mode: 'index',
+                        intersect: true
+                    },
+                    //legend: {
+                    //    display: true
+                    //},
+                    legend: {
+                        display: true,
+                        onClick: function (e, legendItem) {
+                            e.stopPropagation();
+
+                            var chart = this.chart;
+                            var index = legendItem.datasetIndex;
+                            var meta = chart.getDatasetMeta(index);
+
+                            // Toggle visibility
+                            meta.hidden = meta.hidden === null ? !chart.data.datasets[index].hidden : null;
+
+                            // Check how many datasets are visible
+                            var visibleCount = chart.data.datasets.filter((_, i) => chart.getDatasetMeta(i).hidden === null).length;
+
+                            // If all datasets are hidden, revert the last action
+                            if (visibleCount === 0) {
+                                meta.hidden = false; // Restore visibility of the last clicked dataset
+                            }
+
+                            // Update the chart
+                            chart.update();
+                        }
+                    },
+                    //legend: {
+                    //    display: true,
+                    //    onClick: function (e, legendItem) {
+                    //        e.stopPropagation();
+
+                    //        var chart = this.chart;
+                    //        var index = legendItem.datasetIndex;
+                    //        var meta = chart.getDatasetMeta(index);
+
+                    //        // Toggle the visibility of the dataset
+                    //        meta.hidden = meta.hidden === null ? !chart.data.datasets[index].hidden : null;
+
+                    //        // Count visible datasets
+                    //        var visibleCount = chart.data.datasets.reduce((count, dataset, i) => {
+                    //            return count + (chart.getDatasetMeta(i).hidden ? 0 : 1);
+                    //        }, 0);
+
+                    //        // If all datasets are hidden, revert the last action
+                    //        if (visibleCount === 0) {
+                    //            meta.hidden = false; // Restore visibility
+                    //        }
+
+                    //        chart.update();
+                    //    }
+                    //},
+                    scales: {
+                        yAxes: [{
+                            gridLines: {
+                                display: true,
+                                lineWidth: '4px',
+                                color: 'rgba(0, 0, 0, .2)',
+                                zeroLineColor: 'transparent'
+                            },
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }],
+                        xAxes: [{
+                            display: true,
+                            gridLines: {
+                                display: false
+                            }
+                        }]
+                    },
+                    plugins: {
+                        zoom: {
+                            zoom: {
+                                wheel: {
+                                    enabled: true
+                                },
+                                pinch: {
+                                    enabled: true
+                                },
+                                mode: 'xy',
+                                drag: {
+                                    enabled: true,
+                                    borderColor: 'rgba(255, 0, 0, 0.5)',
+                                    borderWidth: 2,
+                                    backgroundColor: 'rgba(255, 0, 0, 0.1)'
+                                }
+                            },
+                            zoomButtons: {
+                                zoomInText: 'Zoom In',
+                                zoomOutText: 'Zoom Out',
+                                zoomInFunction: function ({ chart }) {
+                                    chart.resetZoom();
+                                },
+                                zoomOutFunction: function ({ chart }) {
+                                    chart.resetZoom();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

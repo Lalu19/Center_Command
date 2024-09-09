@@ -1,0 +1,8 @@
+D:\KB_007\TSBSL_Projects\NewInventoryProj\BusinessLogicLayer\bin\Release\BusinessLogicLayer.dll
+D:\KB_007\TSBSL_Projects\NewInventoryProj\BusinessLogicLayer\bin\Release\BusinessLogicLayer.pdb
+D:\KB_007\TSBSL_Projects\NewInventoryProj\BusinessLogicLayer\bin\Release\System.ComponentModel.Annotations.dll
+D:\KB_007\TSBSL_Projects\NewInventoryProj\BusinessLogicLayer\obj\Release\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+D:\KB_007\TSBSL_Projects\NewInventoryProj\BusinessLogicLayer\obj\Release\BusinessLogicLayer.csproj.CopyComplete
+D:\KB_007\TSBSL_Projects\NewInventoryProj\BusinessLogicLayer\obj\Release\BusinessLogicLayer.dll
+D:\KB_007\TSBSL_Projects\NewInventoryProj\BusinessLogicLayer\obj\Release\BusinessLogicLayer.pdb
+D:\KB_007\TSBSL_Projects\NewInventoryProj\BusinessLogicLayer\obj\Release\BusinessLogicLayer.csprojAssemblyReference.cache
